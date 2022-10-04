@@ -16,7 +16,7 @@ def clock(rad,init):
         tur.circle(rad*3/2,-30)
         tur.pendown()
         tur.pencolor('white')
-        tur.write(i)
+        tur.write(i, align='center', font=('Arial, 20, 'normal'))
     tur.penup()
     tur.circle(rad*3/2,180)
     tur.pendown()
@@ -32,19 +32,22 @@ def time_angle(settime):
     return [hr,mins,sec]
 
 def scene(angles,rad):
-    col=('red','blue','green')
-    for i,c in enumerate(col):
-        tur.pencolor(c)
+    attribute=(('red', 5, rad), ('blue', 3, rad*8/10), ('green', 1, rad*64/100))
+    for i, att in enumerate(attribute):
+        tur.pencolor(att[0])
         tur.rt(angles[i])
-        tur.fd(rad)
-        tur.back(rad)
+        tur.pensize(att[1])
+        tur.fd(att[2])
+        tur.back(att[2])
         tur.lt(angles[i])
 
 def clearscene(angles,rad):
-     tur.pencolor('black')
-     for i in angles:
-          tur.rt(i)
-          tur.fd(rad)
-          tur.back(rad)
-          tur.lt(i)
-     tur.pencolor('white')
+    attribute=((5, rad), (3, rad*8/10), (1, rad*64/100))
+    tur.pencolor('black')
+    for i, att in enumerate(attribute):
+         tur.rt(angles[i])
+         tur.pensize(att[0])
+         tur.fd(att[1])
+         tur.back(att[1])
+         tur.lt(angles[i])
+    tur.pencolor('white')
